@@ -1,9 +1,15 @@
-
 import subprocess
-import shlex
 
 def run_command():
-    command = input("Enter a shell command: ")
-    subprocess.call(shlex.split(command))
+    allowed_commands = {
+        "list": ["ls", "-la"],
+        "date": ["date"],
+        "uptime": ["uptime"]
+    }
+    choice = input("Enter command (list/date/uptime): ")
+    if choice in allowed_commands:
+        subprocess.call(allowed_commands[choice])
+    else:
+        print("Command not allowed.")
 
 run_command()
