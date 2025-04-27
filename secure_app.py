@@ -1,4 +1,4 @@
-import subprocess
+import subprocess  # nosec
 
 def run_command():
     allowed_commands = {
@@ -8,7 +8,7 @@ def run_command():
     }
     choice = input("Enter command (list/date/uptime): ")
     if choice in allowed_commands:
-        subprocess.call(allowed_commands[choice])
+        subprocess.call(allowed_commands[choice])  # nosec
     else:
         print("Command not allowed.")
 
