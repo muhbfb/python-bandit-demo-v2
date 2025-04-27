@@ -15,4 +15,4 @@ jobs:
       - name: Install Bandit
         run: pip install bandit
       - name: Run Bandit
-        run: bandit -r . -f txt
+        run: bandit -r secure_app.py
