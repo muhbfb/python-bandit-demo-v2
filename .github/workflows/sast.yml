@@ -1,0 +1,44 @@
+name: SAST Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  bandit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        pip install bandit flask
+
+    - name: Run Bandit
+      run: |
+        bandit -r . --exit-zero --format json > bandit-report.json
+
+    - name: Upload report
+      uses: actions/upload-artifact@v3
+      with:
+        name: bandit-report
+        path: bandit-report.json
+
+    - name: Fail on critical findings
+      run: |
+        CRITICAL=$(jq '.results | map(select(.issue_severity=="HIGH" or .issue_severity=="CRITICAL")) | length' bandit-report.json)
+        if [ "$CRITICAL" -gt 0 ]; then
+          echo "\n🔴 Critical issues detected: $CRITICAL\n"
+          exit 1
+        else
+          echo "✅ No critical issues found."
+        fi
