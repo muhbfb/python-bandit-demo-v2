@@ -1,13 +1,7 @@
-import os
-from flask import Flask, request
-
-app = Flask(__name__)
-
-@app.route('/run')
-def run_shell():
-    cmd = request.args.get('cmd')
-    os.system(cmd)         # insecure: shell injection
-    return "Executed"
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACCXUw9tQ6nXYA8rbRKokEceZ7dPBiyxNqbkROYaBxHfjgAAAJjFZI6QxWSO
+kAAAAAtzc2gtZWQyNTUxOQAAACCXUw9tQ6nXYA8rbRKokEceZ7dPBiyxNqbkROYaBxHfjg
+AAAECS6LFOeuU4DDA8GhW6bH+Te2TGtW+ljxxR/ipB7yp/5JdTD21DqddgDyttEqiQRx5n
+t08GLLE2puRE5hoHEd+OAAAAEG11aGJmYkB1bW0uYWMuaWQBAgMEBQ==
+-----END OPENSSH PRIVATE KEY-----
